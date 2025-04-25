@@ -1,8 +1,40 @@
-{% comment %} {% extends "global/base.html" %} {% endcomment %}
-{% block title %}Synera{% endblock %}
+{% extends "global/base.html" %}
+
 {% block content %}
     <div class="container">
         <h1>Bem-vindo ao Synera</h1>
         <p>Esta é a página inicial do Synera.</p>
+    </div>
+
+    <div class="client-list-container">
+        <h1>Client List</h1>
+        <table class="client-table">
+            <thead class="client-table-header">
+                <tr class="client-table-header-row">
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>CNPJ</th>
+                    <th>Address</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for client in clients %}
+                <tr>
+                    <td>{{ client.id }}</td>
+                    <td>{{ client.name }}</td>
+                    <td>{{ client.cnpj }}</td>
+                    <td>{{ client.address }}</td>
+                    <td>{{ client.email }}</td>
+                    <td>{{ client.phone }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6">Nenhum cliente encontrado.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}

@@ -1,11 +1,75 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bem vindo ao Synera</title>
+    <link rel="stylesheet" href="{% static 'global/css/style.css' %}">
 </head>
 <body>
-    
+    <header class="header">
+        <div class="nav-left">
+            <a href="#">Clientes</a>
+        </div>
+
+        <div class="header-title">
+            <a href="#">Synera</a>
+        </div>
+
+        <div class="nav-right"> 
+            <a href="#">Orders</a>
+        </div>
+    </header>
+
+    {% block content %}
+        <div class="client-list-container">
+            {% comment %} aqui eu quero ter uma barra de pesquisa para buscar pelo id e cnpj {% endcomment %}
+            <h1 class='client-table-title'>Client List</h1>
+            <form method="GET" action="{% url 'client:index' %}">
+                <input type="text" name="search" placeholder="Search by ID or CNPJ">
+                <button type="submit">Search</button>
+            </form>
+            <table class="client-table">
+                <thead class="client-table-header">
+                    <tr class="client-table-header-row">
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>CNPJ</th>
+                        <th>Address</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                    </tr>
+                </thead>
+                <tbody class='client-table-body'>
+                    {% for client in clients %}
+                    <tr>
+                        {% comment %} client.id e client. name precisam ser links clicaveis {% endcomment %}
+                        <td><a href="#">{{ client.id }}</a></td>
+                        <td><a href="#">{{ client.name }}</a></td>
+                        <td>{{ client.cnpj }}</td>
+                        <td>{{ client.address }}</td>
+                        <td>{{ client.email }}</td>
+                        <td>{{ client.phone }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6">Nenhum cliente encontrado.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endblock %}
+
+    <footer>
+        <div class="contact-info">
+            <p class='contact-info-items'>Endereço: Rua Exemplo, 123, Juiz de Fora, MG</p>
+            <p class='contact-info-items'>Telefone: (32) 1234-5678</p>
+            <p class='contact-info-items'>Email: rhftalentosjf@gmail.com</p>
+        </div>
+        
+        <p class='copyright'>&copy; 2025 Synera. Todos os direitos reservados.</p>
+    </footer>
 </body>
 </html>
