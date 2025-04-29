@@ -92,13 +92,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bem vindo ao Synera</title>
+    <!-- <title>Bem vindo ao Synera</title> -->
     {% comment %} <link rel="stylesheet" href="{% static 'global/css/style.css' %}"> {% endcomment %}
 </head>
 <body>
     <header class="header">
         <div class="nav-left">
-            <a href="{% url "client:client_create" %}">Create</a>
+            <a href="{% url "client:client_create" %}">Create Client</a>
         </div>
 
         <div class="header-title">
@@ -106,7 +106,7 @@
         </div>
 
         <div class="nav-right"> 
-            <a href="#">Orders</a>
+            <a href="{% url "order:index" %}">Orders Page</a>
         </div>
     </header>
 
@@ -115,13 +115,12 @@
     {% endblock  %}
 
     <footer>
-        <div class="contact-info">
-            <p class='contact-info-items'>Endereço: Rua Exemplo, 123, Juiz de Fora, MG</p>
-            <p class='contact-info-items'>Telefone: (32) 1234-5678</p>
-            <p class='contact-info-items'>Email: rhftalentosjf@gmail.com</p>
-        </div>
-        
-        <p class='copyright'>&copy; 2025 Synera. Todos os direitos reservados.</p>
+            <div class="contact-info">
+                <p class='contact-info-items'>Address: Example Street, 123, Juiz de Fora, MG</p>
+                <p class='contact-info-items'>Phone: (32) 1234-5678</p>
+                <p class='contact-info-items'>Email:rhftalentosjf@gmail.com</p>
+            </div>
+            <p class='copyright'>&copy; 2025 Synera. All rights reserved. Developed by Luiz Nazareth</p>
     </footer>
 </body>
 </html>

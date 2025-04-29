@@ -95,14 +95,41 @@
             cursor: pointer;
             margin: 25px 7px;
         }
+        .client-list-container form a{
+            padding: 10px 20px;
+            background-color: #7B68EE;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 25px 7px;
+            text-decoration: none;
+        }
+        .pagination {
+            margin-bottom:32px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .pagination a {
+            margin: 0 5px;
+            text-decoration: none;
+            color: #7B68EE;
+            font-weight: bold;
+        }
+        .pagination span {
+            font-weight: bold;
+        }
     </style>
+    <title> Synera </title>
 
     <div class="client-list-container">
         {% comment %} aqui eu quero ter uma barra de pesquisa para buscar pelo id e cnpj {% endcomment %}
         {% comment %} <h1 class='client-table-title'>Client List</h1> {% endcomment %}
         <form method="GET" action="{% url 'client:index' %}">
-            <input type="text" name="search" placeholder="Search by ID or CNPJ">
+            <input type="text" name="search" placeholder="Search by ID or name" value="{{ search_query }}">
             <button type="submit">Search</button>
+            <a href="{% url 'client:index' %}">Clear</a>
         </form>
         <table class="client-table">
             <thead class="client-table-header">
@@ -134,4 +161,18 @@
             </tbody>
         </table>
     </div>
+    <div>
+        {% comment %} aqui eu quero ter uma barra de paginação {% endcomment %}
+        <div class="pagination">
+            {% if clients.has_previous %}
+                <a href="?page=1">First</a>
+                <a href="?page={{ clients.previous_page_number }}">Previous</a>
+            {% endif %}
+            <span>Page {{ clients.number }} of {{ clients.paginator.num_pages }}</span>
+            {% if clients.has_next %}
+                <a href="?search={{ search_query }}&page={{ page_obj.next_page_number }}">Next</a>
+                <a href="?search={{ search_query }}&page={{ clients.paginator.num_pages }}">Last</a>
+            {% endif %}
+        </div>
+            
 {% endblock content %}

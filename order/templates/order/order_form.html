@@ -1,0 +1,139 @@
+{% extends "global/base.html" %}
+
+{% block content %}
+
+    <style>
+        .order-form-container {
+            margin: 110px 400px 20px 400px;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            border-color: #7B68EE;
+            background-color: #E6E6FA;
+        }
+        .order-form-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            color: #7B68EE;
+            width: 100%;
+    }
+    .order-form-container form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .form-group label {
+        font-size: 18px;
+        margin-bottom: 2px;
+        display: block;
+        color: #7B68EE;
+    }
+    .form-group input, .form-group select {
+        width: 300px;
+        padding: 10px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        border-color: #7B68EE;
+    }
+    .form-group input:focus, .form-group select:focus {
+        border-color: #7B68EE;
+        outline: none;
+    }
+    .form-errors {
+        color: red;
+        margin-bottom: 20px;
+    }
+
+    .form-errors ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    .form-errors li {
+        margin-bottom: 5px;
+    }
+
+    button {
+        padding: 10px 20px;
+        background-color: #7B68EE;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #6A5ACD;
+    }
+    .order-form-container a {
+        padding: 10px 20px;
+        background-color: #7B68EE;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 20px;
+        text-decoration: none;
+    }
+    </style>
+
+    <title>Synera - Create Order</title>
+    <div class='order-form-container'>
+        <div class='order-form-title'>Create Order</div>
+        <form method="POST" action="{% url 'order:order_create' %}">
+            {% csrf_token %}
+            {% if order_form.errors %}
+                <div class="form-errors">
+                    <ul>
+                        {% for field in order_form %}
+                            {% for error in field.errors %}4
+                                <li> {{ field.label }}: {{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in order_form.non_field_errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            <div class="form-group">
+                {{ order_form.name.label_tag }}
+                {{ order_form.name }}
+            </div>
+            <div class="form-group">
+                {{ order_form.id.label_tag }}
+                {{ order_form.id }}
+            </div>
+            <div class="form-group">
+                {{ order_form.client.label_tag }}
+                {{ order_form.client }}
+            </div>
+            <div class="form-group">
+                {{ order_form.status.label_tag }}
+                {{ order_form.status }}
+            </div>
+            <div class="form-group">
+                {{ order_form.description.label_tag }}
+                {{ order_form.description }}
+            </div>
+            <div class="form-group">
+                {{ order_form.total_amount.label_tag }}
+                {{ order_form.total_amount }}
+            </div>
+            <div class="form-group">
+                {{ order_form.responsible.label_tag }}
+                {{ order_form.responsible }}
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+        <a href="{% url 'order:index' %}">Back to Order List</a>
+    </div>
+{% endblock %}

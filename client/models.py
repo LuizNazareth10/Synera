@@ -15,16 +15,16 @@ class Client(models.Model):
     def __str__(self):
         return f'{self.name} - {self.cnpj}'
     
-class Orders(models.Model):
-    class Meta:
-        verbose_name_plural='Orders'
-    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='orders', verbose_name='Client')
-    order_number = models.CharField(max_length=20, unique=True, verbose_name='Order Number')
-    order_date = models.DateTimeField(auto_now_add=True, verbose_name='Order Date')
-    status = models.CharField(max_length=20, choices=[('pending', 'Pending'), ('completed', 'Completed')], default='pending', verbose_name='Status')
-    description = models.TextField(verbose_name='Description')
-    total_amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Total Amount')
-    responsible = models.CharField(max_length=50, verbose_name='Responsible Person', choices=[('Mara Ferreira', 'Mara Ferreira'), ('Aline Zampa', 'Aline Zampa')])
+# class Orders(models.Model):
+#     class Meta:
+#         verbose_name_plural='Orders'
+#     client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='orders', verbose_name='Client')
+#     order_number = models.CharField(max_length=20, unique=True, verbose_name='Order Number')
+#     order_date = models.DateTimeField(auto_now_add=True, verbose_name='Order Date')
+#     status = models.CharField(max_length=20, choices=[('pending', 'Pending'), ('completed', 'Completed')], default='pending', verbose_name='Status')
+#     description = models.TextField(verbose_name='Description')
+#     total_amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Total Amount')
+#     responsible = models.CharField(max_length=50, verbose_name='Responsible Person', choices=[('Mara Ferreira', 'Mara Ferreira'), ('Aline Zampa', 'Aline Zampa')])
 
-    def __str__(self):
-        return f'Order {self.order_number} - {self.client.name}'
+#     def __str__(self):
+#         return f'Order {self.order_number} - {self.client.name}'
