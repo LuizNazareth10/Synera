@@ -1,0 +1,93 @@
+{% extends "global/base.html" %}
+{% comment %} aqui é a tela de detalhes do cliente:
+basicamente quando o usuario clicar no nome ou no id do cliente especifico na tela do index.html ele sera redirecionado para ca, onde tera a visualização do seu cliente especifico, com os dados dele {% endcomment %}
+
+{% block content %}
+
+    <style>
+        .client-details-container {
+            margin: 145px auto 55px auto;
+            padding: 20px;
+            width: 500px; /* define a largura fixa */
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            border-color: #7B68EE;
+            background-color: #E6E6FA;
+        }
+
+        .client-details-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            color: #7B68EE;
+            width: 100%;
+        }
+
+        .client-details-table {
+            width: 100%;
+            display:flex;
+            justify-content: center;
+        }
+
+        .client-details-table th{
+            color: #7B68EE;
+        }
+
+
+        .details-th {
+            width: 150px;
+            {% comment %} color: #7B68EE; {% endcomment %}
+        }
+
+        .client-details-table th {
+            background-color: #ffffff;
+            border-radius: 5px;
+            {% comment %} border-color: #7B68EE; {% endcomment %}
+            border: 2px solid #7B68EE;
+        }
+
+        .client-details-table td {
+            {% comment %} background-color: #ffffff; {% endcomment %}
+            {% comment %} border-color: #7B68EE; {% endcomment %}
+            border-bottom: 2px solid #7B68EE;
+            padding: 10px;
+            margin: 10px;
+            text-align:center;
+        }
+
+    </style>
+
+    <div class="client-details-container">
+        <h1 class='client-details-title'>Client Details</h1>
+        <table class="client-details-table">
+            <tr>
+                <th class='details-th'>ID</th>
+                <td>{{ client.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ client.name }}</td>
+            </tr>
+            <tr>
+                <th>CNPJ</th>
+                <td>{{ client.cnpj }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ client.address }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ client.email }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ client.phone }}</td>
+            </tr>
+        </table>
+
+        <!-- Add any additional details or actions here -->
+    </div>
+
+{% endblock content %}

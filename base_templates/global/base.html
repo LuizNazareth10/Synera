@@ -1,20 +1,108 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        display: flex;
+        justify-content: center; /* Centro! */
+        align-items: center;
+        padding: 0 20px;
+        background-color: #7B68EE;
+        height: 90px;
+        border-radius: 0 0 10px 10px;
+    }
+
+    .nav-left, .nav-right {
+        display: flex;
+        align-items: center;
+        margin: 0 20px; /* espaço lateral entre eles */
+    }
+
+    .nav-left a, .nav-right a {
+        text-decoration: none;
+        color: #FCFBF8;
+        font-size: 20px;
+        margin: 0 10px;
+    }
+
+    .header-title {
+        text-align: center;
+        margin: 0 40px; /* espaço maior para separar dos menus */
+    }
+
+    .header-title a {
+        text-decoration: none;
+        color: #FCFBF8;
+        font-size: 32px;
+        font-weight: bold;
+    }
+
+    main {
+        flex: 1;
+        padding: 120px 20px 20px 20px; /* espaço pra não ficar escondido atrás do header */
+    }
+
+    footer {
+        margin-top: auto;
+        background-color: #7B68EE;
+        color: #FCFBF8;
+        text-align: center;
+        padding: 20px;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .contact-info {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
+
+    .contact-info p {
+        margin: 0;
+    }
+
+    .copyright {
+        font-size: 14px;
+    }
+</style>
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bem vindo ao Synera</title>
-    <link rel="stylesheet" href="{% static 'global/css/style.css' %}">
+    {% comment %} <link rel="stylesheet" href="{% static 'global/css/style.css' %}"> {% endcomment %}
 </head>
 <body>
     <header class="header">
         <div class="nav-left">
-            <a href="#">Clientes</a>
+            <a href="{% url "client:client_create" %}">Create</a>
         </div>
 
         <div class="header-title">
-            <a href="#">Synera</a>
+            <a href="{% url 'client:index'%}">Synera</a>
         </div>
 
         <div class="nav-right"> 
@@ -23,44 +111,8 @@
     </header>
 
     {% block content %}
-        <div class="client-list-container">
-            {% comment %} aqui eu quero ter uma barra de pesquisa para buscar pelo id e cnpj {% endcomment %}
-            <h1 class='client-table-title'>Client List</h1>
-            <form method="GET" action="{% url 'client:index' %}">
-                <input type="text" name="search" placeholder="Search by ID or CNPJ">
-                <button type="submit">Search</button>
-            </form>
-            <table class="client-table">
-                <thead class="client-table-header">
-                    <tr class="client-table-header-row">
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>CNPJ</th>
-                        <th>Address</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                    </tr>
-                </thead>
-                <tbody class='client-table-body'>
-                    {% for client in clients %}
-                    <tr>
-                        {% comment %} client.id e client. name precisam ser links clicaveis {% endcomment %}
-                        <td><a href="#">{{ client.id }}</a></td>
-                        <td><a href="#">{{ client.name }}</a></td>
-                        <td>{{ client.cnpj }}</td>
-                        <td>{{ client.address }}</td>
-                        <td>{{ client.email }}</td>
-                        <td>{{ client.phone }}</td>
-                    </tr>
-                    {% empty %}
-                    <tr>
-                        <td colspan="6">Nenhum cliente encontrado.</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    {% endblock %}
+
+    {% endblock  %}
 
     <footer>
         <div class="contact-info">

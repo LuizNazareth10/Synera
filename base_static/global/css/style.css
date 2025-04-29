@@ -13,7 +13,7 @@ header{
     background-color: #7B68EE;
     height: 90px;
     border-radius: 10px;
-    font-family: Georgia, serif;
+    /* font-family: Georgia, serif; */
 }
 .header {
     /* position: fixed; */
@@ -30,13 +30,14 @@ header{
     background-color: #7B68EE;
     height: 90px;
     border-radius: 10px;
-    font-family: Georgia, serif;
+    /* font-family: Georgia, serif; */
 }
 
 .nav-left, .nav-right {
     flex: 1;
     display: flex;
     align-items: center;
+    /* margin-left: 200px; */
 }
 
 .nav-left {
@@ -85,7 +86,7 @@ footer{
     background-color: #7B68EE;
     height: 60px;
     border-radius: 10px;
-    font-family: Georgia, serif;
+    /* font-family: Georgia, serif; */
     /* grudar ele no fim da pagina */
     /* position: fixed; */
     border-radius: 10px;
@@ -107,58 +108,4 @@ footer{
 .contact-info p{
     margin: 0 10px;
     padding: 20px 20px;
-}
-
-.client-table-title{
-    text-align: center;
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    font-family: Georgia, serif;
-    color: #7B68EE;
-}
-
-.client-table{
-    width: 100%;
-    margin-bottom: 20px;
-    margin-top: 20px;
-}
-
-.client-table-header{
-    background-color: #7B68EE;
-    color: #FCFBF8;
-    font-weight: bold;
-    font-size: 18px;
-    border-radius: 5px;
-}
-
-.client-table-header th{
-    padding: 10px;  
-    text-align: center;
-    border-radius: 4px;
-    /* espaçar cada um deles */
-}
-
-.client-table-body{
-    background-color: #FFFAFA;
-    color: black;
-    font-size: 16px;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.client-table-body tr:nth-child(even){
-    background-color: #FFFAFA;
-}
-
-.client-table-body td{
-    padding: 10px;
-    border-radius: 4px;
-    /* espaçar cada um deles */
-    font-family:Verdana, Geneva, Tahoma, sans-serif
-}
-.client-table-body td a{
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
 }

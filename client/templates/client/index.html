@@ -1,13 +1,109 @@
 {% extends "global/base.html" %}
+{% comment %} {% load static %} {% endcomment %}
+{% comment %} importar o css {% endcomment %}
+{% comment %} {% block styles %}
+    <link rel="stylesheet" href="{% static 'client/css/client.css' %}">
+{% endblock %} {% endcomment %}
 
+{% comment %} aqui é a tela de listagem de clientes {% endcomment %}
+{% comment %} {% block title %}Client List{% endblock %} {% endcomment %}
 {% block content %}
-    <div class="container">
-        <h1>Bem-vindo ao Synera</h1>
-        <p>Esta é a página inicial do Synera.</p>
-    </div>
+
+    <style>        
+        .client-table-title{
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            /* font-family: Georgia, serif; */
+            color: #7B68EE;
+        }
+        
+        .client-table{
+            width: 100%;
+            margin-bottom: 20px;
+            margin-top: 20px auto;
+            width:800px;
+            margin-left:250px;
+            border:solid #7B68EE;
+            border-radius: 5px;
+        }
+        
+        .client-table-header{
+            background-color: #7B68EE;
+            color: #FCFBF8;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+        
+        .client-table-header th{
+            padding: 10px;  
+            text-align: center;
+            border-radius: 4px;
+            /* espaçar cada um deles */
+        }
+        
+        .client-table-body{
+            background-color: #FFFAFA;
+            color: black;
+            font-size: 16px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .client-table-body tr:nth-child(even){
+            background-color: #FFFAFA;
+        }
+        
+        .client-table-body td{
+            padding: 10px;
+            {% comment %} border-radius: 4px; {% endcomment %}
+            border-bottom: 1px solid #7B68EE;
+            
+            /* espaçar cada um deles */
+            /* font-family:Verdana, Geneva, Tahoma, sans-serif */
+        }
+        .client-table-body td a{
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+        .client-list-container{
+            margin-top: 100px;
+        }
+        .client-list-container form{
+            display: flex;
+            justify-content: center;
+        }
+        .client-list-container form input{
+            width: 200px;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            border-color: #7B68EE;
+            margin:25px 7px;
+        }
+        .client-list-container form button{
+            padding: 10px 20px;
+            background-color: #7B68EE;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 25px 7px;
+        }
+    </style>
 
     <div class="client-list-container">
-        <h1>Client List</h1>
+        {% comment %} aqui eu quero ter uma barra de pesquisa para buscar pelo id e cnpj {% endcomment %}
+        {% comment %} <h1 class='client-table-title'>Client List</h1> {% endcomment %}
+        <form method="GET" action="{% url 'client:index' %}">
+            <input type="text" name="search" placeholder="Search by ID or CNPJ">
+            <button type="submit">Search</button>
+        </form>
         <table class="client-table">
             <thead class="client-table-header">
                 <tr class="client-table-header-row">
@@ -19,10 +115,11 @@
                     <th>Phone</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class='client-table-body'>
                 {% for client in clients %}
                 <tr>
-                    <td>{{ client.id }}</td>
+                    {% comment %} client.id e client. name precisam ser links clicaveis {% endcomment %}
+                    <td><a href="{% url "client:client_detail" client.id %}">{{ client.id }}</a></td>
                     <td>{{ client.name }}</td>
                     <td>{{ client.cnpj }}</td>
                     <td>{{ client.address }}</td>
@@ -37,4 +134,4 @@
             </tbody>
         </table>
     </div>
-{% endblock %}
+{% endblock content %}

@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class Client(models.Model):
     class Meta:
-        verbose_name_plural:'Clients'
+        verbose_name_plural='Clients'
     name = models.CharField(max_length=100, verbose_name='Client Name')
     cnpj = models.CharField(max_length=14, unique=True, verbose_name='CNPJ')
     address = models.CharField(max_length=255, verbose_name='Address')
@@ -17,7 +17,7 @@ class Client(models.Model):
     
 class Orders(models.Model):
     class Meta:
-        verbose_name_plural:'Orders'
+        verbose_name_plural='Orders'
     client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='orders', verbose_name='Client')
     order_number = models.CharField(max_length=20, unique=True, verbose_name='Order Number')
     order_date = models.DateTimeField(auto_now_add=True, verbose_name='Order Date')
