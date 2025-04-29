@@ -6,7 +6,7 @@ class Order(models.Model):
     class Meta:
         verbose_name_plural='Orders'
         verbose_name='Order'
-    name = models.CharField(max_length=50, verbose_name='Name', default='RHF')
+    name = models.CharField(max_length=50, verbose_name='Name')
     client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='orders', verbose_name='Client')
     # order_number = models.CharField(max_length=20, unique=True, verbose_name='Order Number')
     order_date = models.DateTimeField(auto_now_add=True, verbose_name='Order Date')
