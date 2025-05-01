@@ -1,1 +1,1 @@
-web: gunicorn synera.wsgi
+web: project synera.wsgi
