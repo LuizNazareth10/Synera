@@ -138,6 +138,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # import os
 # import dj_database_url
 
+try:
+    from .local_settings import *
+except ImportError:
+    pass
 
 # # WhiteNoise para servir arquivos estáticos
 # MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
