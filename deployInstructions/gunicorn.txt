@@ -1,0 +1,75 @@
+###############################################################################
+# Replace
+# synera the name of the gunicorn file you want
+# luizgustavonazareth4 your user name
+# syneraapp the folder name of your project
+# project the folder name where you find a file called wsgi.py
+#
+###############################################################################
+# Criando o arquivo synera.socket
+sudo nano /etc/systemd/system/synera.socket
+
+###############################################################################
+# Conteúdo do arquivo
+[Unit]
+Description=gunicorn synera socket
+
+[Socket]
+ListenStream=/run/synera.socket
+
+[Install]
+WantedBy=sockets.target
+
+###############################################################################
+# Criando o arquivo synera.service
+sudo nano /etc/systemd/system/synera.service
+
+###############################################################################
+# Conteúdo do arquivo
+[Unit]
+Description=Gunicorn daemon (You can change if you want)
+Requires=synera.socket
+After=network.target
+
+[Service]
+User=luizgustavonazareth4
+Group=www-data
+Restart=on-failure
+# EnvironmentFile=/home/luizgustavonazareth4/syneraapp/.env
+WorkingDirectory=/home/luizgustavonazareth4/syneraapp
+# --error-logfile --enable-stdio-inheritance --log-level and --capture-output
+# are all for debugging purposes.
+ExecStart=/home/luizgustavonazareth4/syneraapp/venv/bin/gunicorn \
+          --error-logfile /home/luizgustavonazareth4/syneraapp/gunicorn-error-log \
+          --enable-stdio-inheritance \
+          --log-level "debug" \
+          --capture-output \
+          --access-logfile - \
+          --workers 6 \
+          --bind unix:/run/synera.socket \
+          project.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
+
+###############################################################################
+# Ativando
+sudo systemctl start synera.socket
+sudo systemctl enable synera.socket
+
+# Checando
+sudo systemctl status synera.socket
+curl --unix-socket /run/synera.socket localhost
+sudo systemctl status synera
+
+# Restarting
+sudo systemctl restart synera.service
+sudo systemctl restart synera.socket
+sudo systemctl restart synera
+
+# After changing something
+sudo systemctl daemon-reload
+
+# Debugging
+sudo journalctl -u synera.service
+sudo journalctl -u synera.socket

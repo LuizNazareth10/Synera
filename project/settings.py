@@ -132,3 +132,13 @@ MEDIA_ROOT = BASE_DIR / 'media' ##upload files
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# import os
+# import dj_database_url
+
+
+# # WhiteNoise para servir arquivos estáticos
+# MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
+
+# # Configuração do banco para produção
+# DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
